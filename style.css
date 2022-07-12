@@ -1,0 +1,109 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(203, 208, 211);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header, .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: aliceblue;
+    width: 1200px;
+    height: 500px;
+    box-shadow: 2px 2px 10px 2px rgb(155, 147, 147);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ai, .side {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side {
+    gap: 20px;
+
+}
+
+.btn {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: inherit;
+}
+
+.btn:hover {
+    box-shadow: 2px 2px 5px 2px rgb(155, 147, 147);
+    cursor: pointer;
+}
+
+.game {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    background-color: blueviolet;
+    justify-content: center;
+}
+
+.game div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 54px;
+}
+
+.all-around {
+    border: 2px solid black;
+}
+
+.up-down {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.left-right {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.reset {
+    height: 100%;
+    width: 100%;
+}
+
+.btn-reset {
+    height: 100%;
+    width: 100%;
+    background-color: inherit;
+    border: 0px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.btn-reset:hover {
+    background-color: bisque;
+}
