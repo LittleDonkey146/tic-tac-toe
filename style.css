@@ -89,7 +89,11 @@ header, .card {
     border-right: 2px solid black;
 }
 
-.reset {
+#winner-area {
+    font-size: 24px;
+}
+
+#reset {
     height: 100%;
     width: 100%;
 }

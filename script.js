@@ -11,7 +11,7 @@ buttons.forEach(button => {
     })
 });
 
-const test = (function Gameboard() {
+const gameArea = (function Gameboard() {
     let gameboard = [];
 
     let gameClass = document.querySelector('.game');
@@ -39,21 +39,6 @@ const test = (function Gameboard() {
             }
         }
     }
-    // gameboard.forEach(field => {
-    //     field.addEventListener('click', function addDisabled() {
-
-    //         field.textContent = playerChoice; // or it can be 'O' depending on what the player picked
-    //     if(field.className == '') {
-    //         field.className = 'disabled';
-    //     } else {
-    //         field.className += ' disabled';
-    //     }
-    //     winCondition();
-
-    //     field.removeEventListener('click', addDisabled);
-    //     })
-        
-    // });
     console.log(gameboard);
 
     return gameboard;
@@ -72,7 +57,10 @@ function addDisabled() {
     this.removeEventListener('click', addDisabled);
 
 }
-        
+
+function turns() {
+    
+}
 
 const Players = (name) => {
     const sayName = () => console.log(`Hello ${name}`);
@@ -88,26 +76,57 @@ function winCondition() {
     // Horizontal
     for (let i = 0; i < 3; i++) {
         let j = 0;
-        if((test[i][j].textContent == test[i][j+1].textContent && 
-            test[i][j+1].textContent == test[i][j+2].textContent) && 
-            test[i][j].textContent != '') {
-            console.log('same');
+        if((gameArea[i][j].textContent == gameArea[i][j+1].textContent && 
+            gameArea[i][j+1].textContent == gameArea[i][j+2].textContent) && 
+            gameArea[i][j].textContent != '') 
+        {
+            console.log(gameArea[i][j].textContent);
+            printWinner(gameArea[i][j]);
+
         }
     }
 
     // Vertical
     for (let j = 0; j < 3; j++) {
         let i = 0;
-        if((test[i][j].textContent == test[i+1][j].textContent && 
-            test[i+1][j].textContent == test[i+2][j].textContent) && 
-            test[i][j].textContent != '') {
-            console.log('same');
+        if((gameArea[i][j].textContent == gameArea[i+1][j].textContent && 
+            gameArea[i+1][j].textContent == gameArea[i+2][j].textContent) && 
+            gameArea[i][j].textContent != '') 
+        {
+            console.log(gameArea[i][j].textContent);
+            printWinner(gameArea[i][j]);
+
         }
     }
 
     // Diagonal
-    if((test[0][0].textContent == test[1][1].textContent && test[1][1].textContent == test[2][2].textContent) || // Left to right diagonal
-    (test[0][2].textContent == test[1][1].textContent && test[1][1].textContent == test[2][0].textContent)) { // Right to left diagonal
-        console.log(`${test[1][1].textContent} wins`)
+    if((gameArea[0][0].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][2].textContent) || // Left to right diagonal
+    (gameArea[0][2].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][0].textContent)) // Right to left diagonal
+    { 
+        console.log(gameArea[1][1].textContent);
+        printWinner(gameArea[1][1]);
+
     }
-}    
+
+}
+
+function printWinner(e) {
+    const printArea = document.getElementById('winner-area');
+    printArea.textContent = `${e.textContent} wins!`;
+}
+
+const reset = document.getElementById('reset');
+reset.addEventListener('click', restart);
+
+function restart() {
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            gameArea[i][j].textContent = '';
+        }
+    }
+}
+
+// TODO: 
+// 1) Clean up the interface to allow players to put in their names, 
+// 2) include a button to start/restart the game (DONE)
+// 3) add a display element that congratulates the winning player! (DONE)
