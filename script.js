@@ -84,23 +84,30 @@ function Gameflow() {
 }
 
 function winCondition() {
-
     
     // Horizontal
-    // for (let i = 0; i < 3; i++) {
-    //     for (let j = 0; j < 3; j++) {
-    //         if(test[0][j].textContent == test[0][j+1].textContent) {
-    //             console.log('WON');
-    //         } else {
-    //             console.log('NO!');
-    //         }
-    //     }
-    // }
+    for (let i = 0; i < 3; i++) {
+        let j = 0;
+        if((test[i][j].textContent == test[i][j+1].textContent && 
+            test[i][j+1].textContent == test[i][j+2].textContent) && 
+            test[i][j].textContent != '') {
+            console.log('same');
+        }
+    }
+
     // Vertical
+    for (let j = 0; j < 3; j++) {
+        let i = 0;
+        if((test[i][j].textContent == test[i+1][j].textContent && 
+            test[i+1][j].textContent == test[i+2][j].textContent) && 
+            test[i][j].textContent != '') {
+            console.log('same');
+        }
+    }
 
     // Diagonal
-    if(test[0][0].textContent == test[0][1].textContent && test[0][1].textContent == test[0][2].textContent) {
-        console.log(`${test[0][0].textContent} wins`) // not good printing a square value. got to change
+    if((test[0][0].textContent == test[1][1].textContent && test[1][1].textContent == test[2][2].textContent) || // Left to right diagonal
+    (test[0][2].textContent == test[1][1].textContent && test[1][1].textContent == test[2][0].textContent)) { // Right to left diagonal
+        console.log(`${test[1][1].textContent} wins`)
     }
-    
-}
+}    
