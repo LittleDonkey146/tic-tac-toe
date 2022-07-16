@@ -39,27 +39,21 @@ const gameArea = (function Gameboard() {
             }
         }
     }
-    console.log(gameboard);
 
     return gameboard;
 })();
 
 function addDisabled() {
-
     this.textContent = playerChoice; // 'X' or 'O' depending on what the player picks
     if(this.className == '') {
         this.className = 'disabled';
     } else {
         this.className += ' disabled';
     }
-    
-    // winCondition(); <--- THIS DOESNT GO HERE
+    winCondition()
+    Gameflow()
     this.removeEventListener('click', addDisabled);
 
-}
-
-function turns() {
-    
 }
 
 const Players = (name) => {
@@ -68,7 +62,11 @@ const Players = (name) => {
 }
 
 function Gameflow() {
-
+    if (playerChoice == 'X') {
+        playerChoice = 'O'
+    } else {
+        playerChoice = 'X';
+    }
 }
 
 function winCondition() {
@@ -80,9 +78,7 @@ function winCondition() {
             gameArea[i][j+1].textContent == gameArea[i][j+2].textContent) && 
             gameArea[i][j].textContent != '') 
         {
-            console.log(gameArea[i][j].textContent);
             printWinner(gameArea[i][j]);
-
         }
     }
 
@@ -93,26 +89,26 @@ function winCondition() {
             gameArea[i+1][j].textContent == gameArea[i+2][j].textContent) && 
             gameArea[i][j].textContent != '') 
         {
-            console.log(gameArea[i][j].textContent);
             printWinner(gameArea[i][j]);
-
         }
     }
 
     // Diagonal
-    if((gameArea[0][0].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][2].textContent) || // Left to right diagonal
-    (gameArea[0][2].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][0].textContent)) // Right to left diagonal
+    if(((gameArea[0][0].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][2].textContent) || // Left to right diagonal
+    (gameArea[0][2].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][0].textContent)) && // Right to left diagonal
+    (gameArea[0][0].textContent != '' && gameArea[1][1].textContent != '' && gameArea[2][2].textContent != '') || (gameArea[0][2].textContent != '' &&
+    gameArea[2][0].textContent != '' && gameArea[1][1].textContent != '')) 
     { 
-        console.log(gameArea[1][1].textContent);
+        console.log('3')
+
         printWinner(gameArea[1][1]);
-
     }
-
 }
 
 function printWinner(e) {
+    console.log('test')
     const printArea = document.getElementById('winner-area');
-    printArea.textContent = `${e.textContent} wins!`;
+    printArea.textContent = `${e.textContent} won!`;
 }
 
 const reset = document.getElementById('reset');
@@ -124,9 +120,13 @@ function restart() {
             gameArea[i][j].textContent = '';
         }
     }
+
+    //got to reset the names of the HTML as well
 }
 
 // TODO: 
 // 1) Clean up the interface to allow players to put in their names, 
-// 2) include a button to start/restart the game (DONE)
-// 3) add a display element that congratulates the winning player! (DONE)
+// 2) Implement the 'turn' mechanic
+
+// Known bugs:
+// 1) restart not working properly 

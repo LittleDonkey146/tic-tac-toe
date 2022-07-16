@@ -64,6 +64,7 @@ header, .card {
     grid-template-rows: repeat(3, 100px);
     background-color: blueviolet;
     justify-content: center;
+    padding: 1em 0em 1em 0em;
 }
 
 .game div {
@@ -76,17 +77,17 @@ header, .card {
 }
 
 .all-around {
-    border: 2px solid black;
+    border: 3px solid black;
 }
 
 .up-down {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
 }
 
 .left-right {
-    border-left: 2px solid black;
-    border-right: 2px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
 }
 
 #winner-area {
