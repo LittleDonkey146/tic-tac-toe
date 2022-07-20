@@ -50,8 +50,8 @@ function addDisabled() {
     } else {
         this.className += ' disabled';
     }
-    winCondition()
-    Gameflow()
+    winCondition();
+    Gameflow();
     this.removeEventListener('click', addDisabled);
 
 }
@@ -99,14 +99,11 @@ function winCondition() {
     (gameArea[0][0].textContent != '' && gameArea[1][1].textContent != '' && gameArea[2][2].textContent != '') || (gameArea[0][2].textContent != '' &&
     gameArea[2][0].textContent != '' && gameArea[1][1].textContent != '')) 
     { 
-        console.log('3')
-
         printWinner(gameArea[1][1]);
     }
 }
 
-function printWinner(e) {
-    console.log('test')
+const printWinner = (e) => {
     const printArea = document.getElementById('winner-area');
     printArea.textContent = `${e.textContent} won!`;
 }
@@ -118,15 +115,17 @@ function restart() {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             gameArea[i][j].textContent = '';
+            
+            gameArea[i][j].className.replace('disabled', ''); // this has to return to something
         }
     }
 
-    //got to reset the names of the HTML as well
 }
 
 // TODO: 
 // 1) Clean up the interface to allow players to put in their names, 
-// 2) Implement the 'turn' mechanic
+// 2) Implement the 'turn' mechanic (Gameflow)
+// 3) Implement 'it's a tie' mechanic
 
 // Known bugs:
 // 1) restart not working properly 
