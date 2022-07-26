@@ -60,7 +60,7 @@ function addDisabled() {
 }
 
 const Players = (name) => {
-    const sayName = () => console.log(`Hello ${name}`);
+    const sayName = () => console.log(`${name}`);
     return {sayName};
 }
 
@@ -119,6 +119,11 @@ function winCondition() {
 function printWinner(e) {
     const printArea = document.getElementById('winner-area');
 
+    if(moves == 1) {
+        printArea.textContent = ``;
+        return;
+    }
+
     if (tieBool) {
         printArea.textContent = `It's a tie!`;
     } else {
@@ -133,18 +138,16 @@ function restart() {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             gameArea[i][j].textContent = '';
-            moves = 1;
-            tieBool = false;
             
-            gameArea[i][j].className.replace('disabled', ''); // this has to return to something
+            gameArea[i][j].addEventListener('click', addDisabled);
         }
     }
-
+    moves = 1;
+    tieBool = false;
+    playerChoice = 'X';
+    printWinner();
 }
 
 // TODO: 
-// 1) Clean up the interface to allow players to put in their names, 
-// 2) Implement the 'turn' mechanic (Gameflow)
-
-// Known bugs:
-// 1) restart not working properly 
+// 1) Clean up the interface to allow players to put in their names, (optional)
+// 2) Implement the 'turn' mechanic (Gameflow) (kind of working)

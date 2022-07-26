@@ -90,6 +90,11 @@ header, .card {
     border-right: 3px solid black;
 }
 
+#names {
+    display: flex;
+    gap: 100px;
+}
+
 #winner-area {
     font-size: 24px;
 }
