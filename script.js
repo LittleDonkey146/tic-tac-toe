@@ -1,6 +1,9 @@
 const buttons = document.querySelectorAll('.btn');
 
 let playerChoice = 'X';
+let moves = 1;
+let tieBool = false;
+
 buttons.forEach(button => {
     button.addEventListener('click', () => { 
         if(button.textContent == 'X') {
@@ -67,6 +70,7 @@ function Gameflow() {
     } else {
         playerChoice = 'X';
     }
+    moves++;
 }
 
 function winCondition() {
@@ -79,6 +83,7 @@ function winCondition() {
             gameArea[i][j].textContent != '') 
         {
             printWinner(gameArea[i][j]);
+            return;
         }
     }
 
@@ -90,22 +95,35 @@ function winCondition() {
             gameArea[i][j].textContent != '') 
         {
             printWinner(gameArea[i][j]);
+            return;
         }
     }
 
     // Diagonal
     if(((gameArea[0][0].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][2].textContent) || // Left to right diagonal
     (gameArea[0][2].textContent == gameArea[1][1].textContent && gameArea[1][1].textContent == gameArea[2][0].textContent)) && // Right to left diagonal
-    (gameArea[0][0].textContent != '' && gameArea[1][1].textContent != '' && gameArea[2][2].textContent != '') || (gameArea[0][2].textContent != '' &&
-    gameArea[2][0].textContent != '' && gameArea[1][1].textContent != '')) 
+    ((gameArea[0][0].textContent != '' && gameArea[1][1].textContent != '' && gameArea[2][2].textContent != '') || (gameArea[0][2].textContent != '' &&
+    gameArea[2][0].textContent != '' && gameArea[1][1].textContent != ''))) 
     { 
         printWinner(gameArea[1][1]);
+        return;
+    }
+
+    // Tie check
+    if (moves == 9) {
+        tieBool = true;
+        printWinner();
     }
 }
 
-const printWinner = (e) => {
+function printWinner(e) {
     const printArea = document.getElementById('winner-area');
-    printArea.textContent = `${e.textContent} won!`;
+
+    if (tieBool) {
+        printArea.textContent = `It's a tie!`;
+    } else {
+        printArea.textContent = `${e.textContent} won!`;
+    }
 }
 
 const reset = document.getElementById('reset');
@@ -115,6 +133,8 @@ function restart() {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             gameArea[i][j].textContent = '';
+            moves = 1;
+            tieBool = false;
             
             gameArea[i][j].className.replace('disabled', ''); // this has to return to something
         }
@@ -125,7 +145,6 @@ function restart() {
 // TODO: 
 // 1) Clean up the interface to allow players to put in their names, 
 // 2) Implement the 'turn' mechanic (Gameflow)
-// 3) Implement 'it's a tie' mechanic
 
 // Known bugs:
 // 1) restart not working properly 
